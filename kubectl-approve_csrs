@@ -11,13 +11,26 @@ if [[ $? != 0 ]] ; then
     exit 1
 fi
 
-# Get list of pending status CSRs
-PENDING_CSRS=$(oc --insecure-skip-tls-verify=true get csr \
-    -o go-template='{{range .items}}{{if not .status}}{{.metadata.name}}{{"\n"}}{{end}}{{end}}')
+get_pending_csrs() {
+    # Returns space delimited list of pending CSRs
+    PENDING_CSRS=$(oc --insecure-skip-tls-verify=true get csr \
+        -o go-template='{{range .items}}{{if not .status}}{{.metadata.name}}{{" "}}{{end}}{{end}}')
+}
+get_pending_csrs
 
-# If found, approve all pending CSRs
 if [[ -z "$PENDING_CSRS" ]] ; then
     echo 'No pending CSRs to approve!'
-else
+    exit 0
+fi
+
+# Approve pending CSRs
+oc --insecure-skip-tls-verify=true adm certificate approve $PENDING_CSRS
+
+# Wait 10 seconds and check again to see if additional CSRs popped up
+sleep 10
+get_pending_csrs
+
+# If new CSRs popped up, approve them
+if [[ -n "$PENDING_CSRS" ]] ; then
     oc --insecure-skip-tls-verify=true adm certificate approve $PENDING_CSRS
 fi
