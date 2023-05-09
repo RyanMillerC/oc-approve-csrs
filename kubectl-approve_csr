@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# Approve pending certificates
+oc --insecure-skip-tls-verify=true get csr \
+    -o go-template='{{range .items}}{{if not .status}}{{.metadata.name}}{{"\n"}}{{end}}{{end}}' \
+    | xargs oc --insecure-skip-tls-verify=true adm certificate approve
