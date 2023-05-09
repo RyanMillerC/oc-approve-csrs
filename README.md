@@ -3,7 +3,7 @@
 How many times has this happened to you?
 
 * You have an OpenShift cluster in a lab (or something like that) 👍
-* You power it off (because why run a lab OpenShift cluster 24/7 😅)
+* You power it off (because why run a lab OpenShift cluster 24/7) 😅
 * You power it back on a few days later 🔌
 * The web console doesn't come up 😬
 * You start digging around 🕵️
@@ -15,7 +15,7 @@ How many times has this happened to you?
 
 This OpenShift CLI (oc) plugin will approve all pending CSRs in a single
 command, without the need to dig through your notes, search the web, or
-memorize **this monster command**:
+memorize **this monster command** 😈:
 
 ```bash
 oc --insecure-skip-tls-verify=true get csr -o go-template='{{range .items}}{{if not .status}}{{.metadata.name}}{{"\n"}}{{end}}{{end}}' | xargs oc --insecure-skip-tls-verify=true adm certificate approve
