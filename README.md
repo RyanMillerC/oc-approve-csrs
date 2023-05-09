@@ -75,3 +75,6 @@ kubectl approve-csrs
 The command will intentionally hang for 10 seconds after approving pending CSRs
 to approve any subsequent CSRs that pop up as pending. Saves you from typing
 the command twice. 😎
+
+In some circumstances you may need to run the command twice to manually approve
+a second round of CSRs that come in after our 10 second window.
