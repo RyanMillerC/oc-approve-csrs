@@ -1,11 +1,10 @@
 #!/bin/bash
 
-# Exit on error
 set -e
 
-# Validate that oc is installed. oc is required instead of kubectl because of
-# the 'oc adm certificate' subcommand.
-oc version > /dev/null
+# Validate that oc is installed. oc is required instead of kubectl because this
+# script relies on the 'oc adm certificate' subcommand.
+oc version &> /dev/null
 if [[ $? != 0 ]] ; then
     echo "ERROR: Command 'oc' not found in PATH"
     exit 1
