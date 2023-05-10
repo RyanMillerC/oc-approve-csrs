@@ -54,9 +54,19 @@ manually approve them. 😅
 **NOTE:** This plugin requires the [OpenShift CLI] client `oc` because it
 relies on the `oc adm certificates` subcommand that `kubectl` doesn't have.
 
-I'm working on getting this repo into the [Krew] plugin index. For now you can
-manually copy the `oc-approve_csrs` script from this repo and place it in your
-PATH.
+[Krew] is recommended to install this plugin. (See the [OpenShift documentation
+on Krew] for more details.)
+
+I'm [working on][krew-index PR] getting this plugin into the [Krew Plugin
+Index]. For now you can manually specify the [install manifest] using the
+command below:
+
+```bash
+oc krew install --manifest-url=https://raw.githubusercontent.com/RyanMillerC/krew-index/approve-csrs/plugins/approve-csrs.yaml
+```
+
+If you can't use Krew to install plugins, you can manually copy the
+`oc-approve_csrs` script from this repo and place it in your PATH.
 
 ## Usage
 
@@ -77,7 +87,10 @@ the command twice. 😎
 In some circumstances you may need to run the command twice to manually approve
 a second round of CSRs that come in after our 10 second window.
 
+[Krew Plugin Index]: https://krew.sigs.k8s.io/plugins/
 [Krew]: https://krew.sigs.k8s.io/
 [OpenShift CLI]: https://docs.openshift.com/container-platform/latest/cli_reference/openshift_cli/getting-started-cli.html
 [OpenShift Documentation on Krew]: https://docs.openshift.com/container-platform/latest/cli_reference/openshift_cli/managing-cli-plugins-krew.html
 [Recover from Expired Certs]: https://docs.openshift.com/container-platform/latest/backup_and_restore/control_plane_backup_and_restore/disaster_recovery/scenario-3-expired-certs.html
+[install manifest]: https://raw.githubusercontent.com/RyanMillerC/krew-index/approve-csrs/plugins/approve-csrs.yaml
+[krew-index PR]: https://github.com/kubernetes-sigs/krew-index/pull/3125
