@@ -1,4 +1,13 @@
 #!/bin/bash
+#
+# oc plugin to approve all pending OpenShift CertificatSigningRequests (CSRs)
+# in a single command.
+#
+# This script should be placed in your PATH with the name "oc-approve_csrs".
+# After placing in your path, view the plugin help message with:
+#
+#   oc approve-csrs --help
+#
 
 set -e
 
