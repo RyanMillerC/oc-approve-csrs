@@ -73,7 +73,7 @@ warned... ⚠️**
 To approve all pending CSRs:
 
 ```bash
-kubectl approve-csrs
+oc approve-csrs
 ```
 
 The command will intentionally hang for 10 seconds after approving pending CSRs
