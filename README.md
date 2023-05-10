@@ -51,15 +51,15 @@ manually approve them. 😅
 
 ## Installation
 
-**NOTE:** This plugin requires the [OpenShift CLI] client `oc` because it
-relies on the `oc adm certificates` subcommand that `kubectl` doesn't have.
+This plugin requires the [OpenShift CLI] client `oc` to be in your PATH because
+it relies on the `oc adm certificates` subcommand. You can still run this
+plugin as `kubectl approve-csrs` but the `oc` executable has to be available.
 
 [Krew] is recommended to install this plugin. (See the [OpenShift documentation
 on Krew] for more details.)
 
 I'm [working on][krew-index PR] getting this plugin into the [Krew Plugin
-Index]. For now you can manually specify the [install manifest] using the
-command below:
+Index]. For now you can install by manually specifying the [install manifest]:
 
 ```bash
 oc krew install --manifest-url=https://raw.githubusercontent.com/RyanMillerC/krew-index/approve-csrs/plugins/approve-csrs.yaml
