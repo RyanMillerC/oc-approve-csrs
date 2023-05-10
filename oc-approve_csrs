@@ -15,13 +15,13 @@ VERSION='v0.0.1'
 
 # Print message and exit with success code
 echo_and_exit() {
-    echo $@
+    echo "$@"
     exit 0
 }
 
 # Print error message to stderr and exit with error code
 echo_and_exit_error() {
-    >&2 echo $@
+    >&2 echo "$@"
     exit 1
 }
 
