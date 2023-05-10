@@ -13,7 +13,7 @@ How many times has this happened to you?
 * You run the command to approve them 💻
 * You wait 10 minutes and the web console comes up! 😃
 
-This OpenShift CLI (oc) plugin will approve all pending CSRs in a single
+This [OpenShift CLI] plugin will approve all pending CSRs in a single `oc`
 command, without the need to dig through your notes, search the web, or
 memorize **this monster command** 😈:
 
@@ -51,14 +51,18 @@ manually approve them. 😅
 
 ## Installation
 
-**NOTE:** This plugin requires `oc` because it relies on the `oc adm
-certificates` subcommand that `kubectl` doesn't have.
+**NOTE:** This plugin requires the [OpenShift CLI] client `oc` because it
+relies on the `oc adm certificates` subcommand that `kubectl` doesn't have.
 
-Install approve-csrs with Krew:
+[Krew] is recommended to install this plugin. (See the
+[OpenShift documentation on Krew] for more details.)
 
 ```bash
 oc krew install approve-csrs
 ```
+
+If you can't use Krew to install plugins, you can manually copy the
+`oc-approve_csrs` script from this repo and place it in your PATH.
 
 ## Usage
 
@@ -78,3 +82,8 @@ the command twice. 😎
 
 In some circumstances you may need to run the command twice to manually approve
 a second round of CSRs that come in after our 10 second window.
+
+[Krew]: https://krew.sigs.k8s.io/
+[OpenShift CLI]: https://docs.openshift.com/container-platform/latest/cli_reference/openshift_cli/getting-started-cli.html
+[OpenShift Documentation on Krew]: https://docs.openshift.com/container-platform/latest/cli_reference/openshift_cli/managing-cli-plugins-krew.html
+[Recover from Expired Certs]: https://docs.openshift.com/container-platform/latest/backup_and_restore/control_plane_backup_and_restore/disaster_recovery/scenario-3-expired-certs.html
