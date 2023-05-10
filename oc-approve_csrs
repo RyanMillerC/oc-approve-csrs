@@ -2,13 +2,65 @@
 
 set -e
 
-# Validate that oc is installed. oc is required instead of kubectl because this
-# script relies on the 'oc adm certificate' subcommand.
-oc version &> /dev/null
-if [[ $? != 0 ]] ; then
-    echo "ERROR: Command 'oc' not found in PATH"
+VERSION='v0.0.1'
+
+# Print message and exit with success code
+echo_and_exit() {
+    echo $@
+    exit 0
+}
+
+# Print error message to stderr and exit with error code
+echo_and_exit_error() {
+    >&2 echo $@
     exit 1
+}
+
+# Print help message if -h or --help was passed
+if [[ "$1" == "-h" || "$1" == "--help" ]] ; then
+    echo_and_exit "Approve all pending OpenShift CertificatSigningRequests (CSRs) in a single command.
+
+How many times has this happened to you?
+
+* You have an OpenShift cluster in a lab (or something like that) 👍
+* You power it off (because why run a lab OpenShift cluster 24/7) 😅
+* You power it back on a few days later 🔌
+* The web console doesn't come up 😬
+* You start digging around 🕵️
+* You notice some pending CertificateSigningRequests (CSRs) 🤦
+* You dig through your old notes or links to find the support article with the
+  command approve all pending CSRs 🔎
+* You run the command to approve them 💻
+* You wait 10 minutes and the web console comes up! 😃
+
+This OpenShift CLI (oc) plugin will approve all pending CSRs in a single
+command, without the need to dig through your notes, search the web, or
+memorize a monster command! 😈
+
+Usage:
+    oc approve-csrs
+
+Options:
+    -h, --help:
+        Print this message
+    -v, --version:
+        Print the plugin version"
 fi
+
+# Print version if -v or --version was passed
+if [[ "$1" == "-v" || "$1" == "--version" ]] ; then
+    echo_and_exit "oc-approve-csrs version $VERSION"
+fi
+
+# If an unknown argument was passed
+if [[ -n "$1" ]] ; then
+    echo_and_exit_error "ERROR: Unknown argument '$1'"
+fi
+
+# Validate that oc is installed. oc is required instead of kubectl because this
+# script relies on the 'oc adm certificate' subcommand. This will also error if
+# oc is not logged in.
+oc version > /dev/null # || echo_and_exit_error "ERROR: Command 'oc' not found in PATH"
 
 get_pending_csrs() {
     # Returns space delimited list of pending CSRs
@@ -18,8 +70,7 @@ get_pending_csrs() {
 get_pending_csrs
 
 if [[ -z "$PENDING_CSRS" ]] ; then
-    echo 'No pending CSRs to approve!'
-    exit 0
+    echo_and_exit 'No pending CSRs to approve!'
 fi
 
 # Approve pending CSRs
