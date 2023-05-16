@@ -58,8 +58,8 @@ plugin as `kubectl approve-csrs` but the `oc` executable has to be available.
 [Krew] is recommended to install this plugin. (See the [OpenShift documentation
 on Krew] for more details.)
 
-I'm [working on][krew-index PR] getting this plugin into the [Krew Plugin
-Index]. For now you can install by manually specifying the [install manifest]:
+This plugin isn't in the [Krew Plugin Index], so you need to install by specifying
+the [krew-plugin.yaml] install manifest:
 
 ```bash
 $ oc krew install --manifest-url=https://raw.githubusercontent.com/RyanMillerC/oc-approve-csrs/main/krew-plugin.yaml
@@ -92,5 +92,4 @@ a second round of CSRs that come in after our 10 second window.
 [OpenShift CLI]: https://docs.openshift.com/container-platform/latest/cli_reference/openshift_cli/getting-started-cli.html
 [OpenShift Documentation on Krew]: https://docs.openshift.com/container-platform/latest/cli_reference/openshift_cli/managing-cli-plugins-krew.html
 [Recover from Expired Certs]: https://docs.openshift.com/container-platform/latest/backup_and_restore/control_plane_backup_and_restore/disaster_recovery/scenario-3-expired-certs.html
-[install manifest]: https://raw.githubusercontent.com/RyanMillerC/krew-index/approve-csrs/plugins/approve-csrs.yaml
-[krew-index PR]: https://github.com/kubernetes-sigs/krew-index/pull/3125
+[krew-plugin.yaml]: krew-plugin.yaml
