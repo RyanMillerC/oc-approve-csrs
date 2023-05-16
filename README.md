@@ -18,7 +18,7 @@ command, without the need to dig through your notes, search the web, or
 memorize **this monster command** 😈:
 
 ```bash
-oc --insecure-skip-tls-verify=true get csr -o go-template='{{range .items}}{{if not .status}}{{.metadata.name}}{{"\n"}}{{end}}{{end}}' | xargs oc --insecure-skip-tls-verify=true adm certificate approve
+$ oc --insecure-skip-tls-verify=true get csr -o go-template='{{range .items}}{{if not .status}}{{.metadata.name}}{{"\n"}}{{end}}{{end}}' | xargs oc --insecure-skip-tls-verify=true adm certificate approve
 ```
 
 ## Why does this happen?
@@ -43,7 +43,7 @@ console, you may need to manually approve CSRs. To see if you have pending
 CSRs, log in to the cluster with `oc` (or `kubectl`) and run:
 
 ```bash
-oc get csrs
+$ oc get csrs
 ```
 
 If the output contains CSRs with the status *Pending*, you will need to
@@ -62,7 +62,7 @@ I'm [working on][krew-index PR] getting this plugin into the [Krew Plugin
 Index]. For now you can install by manually specifying the [install manifest]:
 
 ```bash
-oc krew install --manifest-url=https://raw.githubusercontent.com/RyanMillerC/krew-index/approve-csrs/plugins/approve-csrs.yaml
+$ oc krew install --manifest-url=https://raw.githubusercontent.com/RyanMillerC/oc-approve-csrs/main/krew-plugin.yaml
 ```
 
 If you can't use Krew to install plugins, you can manually copy the
@@ -77,7 +77,7 @@ warned... ⚠️**
 To approve all pending CSRs:
 
 ```bash
-oc approve-csrs
+$ oc approve-csrs
 ```
 
 The command will intentionally hang for 10 seconds after approving pending CSRs
