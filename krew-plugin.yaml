@@ -1,5 +1,5 @@
 # You can install this plugin with Krew (https://krew.sigs.k8s.io/):
-# $ oc krew install --manifest-url=paste-url-here
+# $ oc krew install --manifest-url=https://raw.githubusercontent.com/RyanMillerC/oc-approve-csrs/main/krew-plugin.yaml
 apiVersion: krew.googlecontainertools.github.com/v1alpha2
 kind: Plugin
 metadata:
